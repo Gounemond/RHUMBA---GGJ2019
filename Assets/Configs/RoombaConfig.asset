@@ -20,4 +20,4 @@ MonoBehaviour:
   - {r: 0.942395, g: 0.5019608, b: 1, a: 0.2509804}
   inputMode: 1
   baseMoveSpeed: 40
-  baseTurnSpeed: 120
+  baseTurnSpeed: 180

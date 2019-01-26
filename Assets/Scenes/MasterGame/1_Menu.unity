@@ -535,6 +535,8 @@ MonoBehaviour:
   - {fileID: 1477414935}
   - {fileID: 2011029613}
   - {fileID: 1677177710}
+  menuUIManager: {fileID: 0}
+  sfxROOOOMBAAAH: {fileID: 0}
 --- !u!1 &561301978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,7 +1253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581b3e3c96df0ef42aef16b63b27b87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dontDestroyOnLoad: 1
+  _dontDestroyOnLoad: 0
   _userData:
     configVars:
       updateLoop: 1
