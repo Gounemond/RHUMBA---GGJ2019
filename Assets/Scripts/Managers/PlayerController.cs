@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+    int playerId;
+
     bool isMoving;
     int rotationVerse;
 
@@ -27,7 +29,7 @@ public class PlayerController : MonoBehaviour {
                     transform.Translate(Vector3.forward * translation);
                 } else if(Input.GetButtonDown("Fire1")) {
                     isMoving = true;
-                    //transform.Translate(Vector3.forward * translation);
+                    rotationVerse = 0;
                 } else {
                     transform.Rotate(Vector3.up * rotation * rotationVerse);
                 }
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour {
     void OnCollision(string tag) {
         if(tag == "Obstacle") {
             isMoving = false;
-            rotationVerse = GameRandom.Core.NextSign();
+            rotationVerse = rotationVerse != 0 ? rotationVerse : GameRandom.Core.NextSign();
         }
     }
 }

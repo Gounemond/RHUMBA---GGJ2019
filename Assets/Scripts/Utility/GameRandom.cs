@@ -45,7 +45,7 @@ public class DefaultRandom : IRandom {
     }
 
     public int NextSign() {
-        return NextInt(0, 1) * 2 - 1;
+        return NextInt(2) * 2 - 1;
     }
 
     public float NextFloat() {
