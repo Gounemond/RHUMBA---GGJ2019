@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 218abcf442a752d4e9677d2fd5adf836, type: 3}
   m_Name: RoombaConfig
   m_EditorClassIdentifier: Assembly-CSharp::RoombaConfig
   inputMode: 0
-  baseMoveSpeed: 2
-  baseTurnSpeed: 50
+  baseMoveSpeed: 12
+  baseTurnSpeed: 250
