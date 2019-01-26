@@ -1,37 +1,45 @@
-﻿using UnityEngine;
+﻿using Rewired;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     int playerId;
+    Player player;
 
     bool isMoving;
     int rotationVerse;
 
+    public void Init(int id) {
+        playerId = id;
+    }
+
+    void Awake() {
+    }
+
     void Start() {
+        player = ReInput.players.GetPlayer(playerId);
         isMoving = false;
         rotationVerse = GameRandom.Core.NextSign();
     }
 
     void Update() {
-        float translation = GameManager.Instance.gameConfig.roombaConfig.baseMoveSpeed * Time.deltaTime;
-        float rotation = GameManager.Instance.gameConfig.roombaConfig.baseTurnSpeed * Time.deltaTime;
         switch(GameManager.Instance.gameConfig.roombaConfig.inputMode) {
             case RoombaInputMode.Move:
-                if(Mathf.Abs(Input.GetAxis("Horizontal")) > 0) {
-                    transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * rotation);
+                if(Mathf.Abs(player.GetAxis("Move")) > 0) {
+                    transform.Rotate(Vector3.up * player.GetAxis("Move") * GameManager.Instance.gameConfig.roombaConfig.baseTurnSpeed * Time.deltaTime);
                 }
-                if(Mathf.Abs(Input.GetAxis("Vertical")) > 0) {
-                    transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * translation);
+                if(Mathf.Abs(player.GetAxis("Rotate")) > 0) {
+                    transform.Translate(Vector3.forward * player.GetAxis("Rotate") * GameManager.Instance.gameConfig.roombaConfig.baseMoveSpeed * Time.deltaTime);
                 }
                 break;
             case RoombaInputMode.Crash:
                 //TODO: input alternativo "Crash"
                 if(isMoving) {
-                    transform.Translate(Vector3.forward * translation);
-                } else if(Input.GetButtonDown("Fire1")) {
+                    transform.Translate(Vector3.forward * GameManager.Instance.gameConfig.roombaConfig.baseMoveSpeed * Time.deltaTime);
+                } else if(player.GetButtonDown("SelectDirection")) {
                     isMoving = true;
                     rotationVerse = 0;
                 } else {
-                    transform.Rotate(Vector3.up * rotation * rotationVerse);
+                    transform.Rotate(Vector3.up * rotationVerse * GameManager.Instance.gameConfig.roombaConfig.baseTurnSpeed * Time.deltaTime);
                 }
                 break;
         }
