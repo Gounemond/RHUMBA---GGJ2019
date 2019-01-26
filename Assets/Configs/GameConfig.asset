@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790d07fe107ad0c43bbb7df3ad82d3cd, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  roombaConfig: {fileID: 11400000, guid: ce2f965910f29dc488841998d3031afd, type: 2}
