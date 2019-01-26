@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218abcf442a752d4e9677d2fd5adf836, type: 3}
   m_Name: RoombaConfig
   m_EditorClassIdentifier: Assembly-CSharp::RoombaConfig
-  inputMode: 0
-  baseMoveSpeed: 12
-  baseTurnSpeed: 250
+  inputMode: 1
+  baseMoveSpeed: 30
+  baseTurnSpeed: 50

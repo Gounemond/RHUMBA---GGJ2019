@@ -11,6 +11,7 @@ public interface IRandom {
     int NextInt();
     int NextInt(int max);
     int NextInt(int min, int max);
+    int NextSign();
     float NextFloat();
     float NextFloat(float max);
     float NextFloat(float min, float max);
@@ -41,6 +42,10 @@ public class DefaultRandom : IRandom {
 
     public int NextInt(int min, int max) {
         return _random.Next(min, max);
+    }
+
+    public int NextSign() {
+        return NextInt(0, 1) * 2 - 1;
     }
 
     public float NextFloat() {
