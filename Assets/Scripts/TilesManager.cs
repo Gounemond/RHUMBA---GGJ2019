@@ -8,15 +8,15 @@ public class TilesManager : MonoBehaviour
     public int player1Tiles;
     public int player2Tiles;
     public int player3Tiles;
-    public int player4Tiles;
+    public int dirtyTiles;
 
     void Start()
     {
-        player0Tiles = GameObject.FindGameObjectsWithTag("Tile").Length;
+        player0Tiles = 0;
         player1Tiles = 0;
         player2Tiles = 0;
         player3Tiles = 0;
-        player4Tiles = 0;
+        dirtyTiles = GameObject.FindGameObjectsWithTag("Tile").Length;
     }
 
     void Update()  {}
@@ -41,7 +41,7 @@ public class TilesManager : MonoBehaviour
                 break;
 
             case 4:
-                player4Tiles--;
+               dirtyTiles--;
                 break;
         }
 
@@ -64,7 +64,7 @@ public class TilesManager : MonoBehaviour
                 break;
 
             case 4:
-                player4Tiles++;
+                dirtyTiles++;
                 break;
         }
     }

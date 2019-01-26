@@ -7,37 +7,36 @@ public class TileScript : MonoBehaviour
     public int oldColour;
     public int newColour;
     public bool enter = true;
-    public string playerTag = "Player0";
+    public int? playerTag = 4;
 
     public TilesManager tilesManagerScript;
 
 
     void Start()
     {      
-        oldColour = 0; //grigio iniziale
+        oldColour = 4; //grigio iniziale
     }
 
     void Update(){}
 
     private void OnTriggerEnter(Collider playerCollider)
-    {
-        Debug.Log("triggrred");
-        playerTag = playerCollider.tag;
+    {   
+        playerTag = playerCollider.GetComponent<PlayerController>()?.playerId;
         switch (playerTag)
         {
-            case "Player0":
+            case 0:
                 newColour = 0;
                 break;
-            case "Player1":
+            case 1:
                 newColour = 1;
                 break;
-            case "Player2":
+            case 2:
                 newColour = 2;
                 break;
-            case "Player3":
+            case 3:
                 newColour = 3;
                 break;
-            case "Player4":
+            default:
                 newColour = 4;
                 break;
         }

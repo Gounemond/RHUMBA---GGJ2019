@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    int playerId;
+   public int playerId;
     Player player;
 
     bool isMoving;
