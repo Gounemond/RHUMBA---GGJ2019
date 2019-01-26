@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    IInputService inputService;
-
     public float currentMoveSpeed;
     public float currentTurnSpeed;
 
