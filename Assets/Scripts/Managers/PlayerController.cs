@@ -11,14 +11,17 @@ public class PlayerController : MonoBehaviour {
     public void Init(int id) {
         playerId = id;
     }
-
-    void Awake() {
-    }
-
+    
     void Start() {
         player = ReInput.players.GetPlayer(playerId);
         isMoving = false;
         rotationVerse = GameRandom.Core.NextSign();
+
+        CameraController cameraController = gameObject.GetComponentInChildren<CameraController>();
+        if(cameraController != null) {
+            cameraController.Init(playerId, GameManager.Instance.totalPlayers);
+            cameraController.enabled = true;
+        }
     }
 
     void Update() {
@@ -32,7 +35,6 @@ public class PlayerController : MonoBehaviour {
                 }
                 break;
             case RoombaInputMode.Crash:
-                //TODO: input alternativo "Crash"
                 if(isMoving) {
                     transform.Translate(Vector3.forward * GameManager.Instance.gameConfig.roombaConfig.baseMoveSpeed * Time.deltaTime);
                 } else if(player.GetButtonDown("SelectDirection")) {

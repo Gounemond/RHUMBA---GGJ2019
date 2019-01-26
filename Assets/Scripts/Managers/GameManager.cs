@@ -43,9 +43,6 @@ public class GameManager : MonoBehaviour {
     }
 
     public void SpawnPlayers(int numPlayers) {
-        float cameraRectWidth = numPlayers > 2 ? 0.5f : 1f;
-        float cameraRectHeight = numPlayers > 1 ? 0.5f : 1f;
-
         for(int i = 0; i < numPlayers; i++) {
             GameObject gameObject = InstantiateAsset(gameConfig.roombaConfig.prefab);
             if(gameObject != null) {
@@ -55,13 +52,6 @@ public class GameManager : MonoBehaviour {
                     playerController.Init(i);
                     playerController.enabled = true;
                 }
-                /*Camera playerCamera = gameObject.GetComponentInChildren<Camera>();
-                if(playerCamera != null) {
-                    if(i == 0) {
-                        playerCamera.rect = new Rect(0f, 0f, cameraRectWidth, cameraRectHeight);
-                    }
-                    playerCamera.rect = new Rect(0.5f * i, 0.5f * i, cameraRectWidth, cameraRectHeight);
-                }*/
             }
         }
         totalPlayers = numPlayers;
