@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour {
     
     void Start() {
         player = ReInput.players.GetPlayer(playerId);
+        TrailRenderer trailRenderer = GetComponentInChildren<TrailRenderer>();
+        if(GameManager.Instance.gameConfig.roombaConfig.trailColor?.Length > playerId) {
+            trailRenderer.startColor = GameManager.Instance.gameConfig.roombaConfig.trailColor[playerId];
+            trailRenderer.endColor = trailRenderer.startColor;
+        }
         isMoving = false;
         rotationVerse = GameRandom.Core.NextSign();
 
