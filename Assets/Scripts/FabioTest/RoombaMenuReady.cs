@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 using DG.Tweening;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class RoombaMenuReady : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class RoombaMenuReady : MonoBehaviour
     public delegate void ActionInt(int playerId);
 
     public event ActionInt OnRoombaReady;
+
+    public Image myBottle;
 
     [Tooltip("Insert here which number this player should be!")]
     public int playerId = 0;     // Rewired player of this controller
@@ -40,7 +44,13 @@ public class RoombaMenuReady : MonoBehaviour
             if (OnRoombaReady != null)
             {
                 OnRoombaReady(playerId);
+                RotateMyBottle();
             }
         }
+    }
+
+    public void RotateMyBottle()
+    {
+        myBottle.transform.DORotate(new Vector3(0, 360, 0), 1f, RotateMode.WorldAxisAdd);
     }
 }

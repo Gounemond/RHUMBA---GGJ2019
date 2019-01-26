@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
 
     public int totalPlayers;
 
+    public Transform spawnPoint;
+
     void Awake() {
         DontDestroyOnLoad(this);
         Instance = this;
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour {
         for(int i = 0; i < numPlayers; i++) {
             GameObject gameObject = InstantiateAsset(gameConfig.roombaConfig.prefab);
             if(gameObject != null) {
-                gameObject.transform.position = new Vector3(50 + 10 * i, gameObject.transform.position.y, -160);
+                gameObject.transform.position = new Vector3(spawnPoint.position.x + 10 * i, spawnPoint.position.y, spawnPoint.position.z);
                 PlayerController playerController = gameObject.GetComponent<PlayerController>();
                 if(playerController != null) {
                     playerController.Init(i);
