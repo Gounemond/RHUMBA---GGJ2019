@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RoombaConfig
   m_EditorClassIdentifier: Assembly-CSharp::RoombaConfig
   prefab: {fileID: 8821127539142747820, guid: 3d87426833859b6479218f91ed726256, type: 3}
-  inputMode: 0
-  baseMoveSpeed: 20
-  baseTurnSpeed: 90
+  inputMode: 1
+  baseMoveSpeed: 40
+  baseTurnSpeed: 130
