@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     int playerId;
     Player player;
+    TrailRenderer trailRenderer;
 
     bool isMoving;
     int rotationVerse;
@@ -11,10 +12,13 @@ public class PlayerController : MonoBehaviour {
     public void Init(int id) {
         playerId = id;
     }
-    
+
+    void Awake() {
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
+    }
+
     void Start() {
         player = ReInput.players.GetPlayer(playerId);
-        TrailRenderer trailRenderer = GetComponentInChildren<TrailRenderer>();
         if(GameManager.Instance.gameConfig.roombaConfig.trailColor?.Length > playerId) {
             trailRenderer.startColor = GameManager.Instance.gameConfig.roombaConfig.trailColor[playerId];
             trailRenderer.endColor = trailRenderer.startColor;
@@ -43,8 +47,7 @@ public class PlayerController : MonoBehaviour {
                 if(isMoving) {
                     transform.Translate(Vector3.forward * GameManager.Instance.gameConfig.roombaConfig.baseMoveSpeed * Time.deltaTime);
                 } else if(player.GetButtonDown("SelectDirection")) {
-                    isMoving = true;
-                    rotationVerse = 0;
+                    ToggleCrashMovement(true);
                 } else {
                     transform.Rotate(Vector3.up * rotationVerse * GameManager.Instance.gameConfig.roombaConfig.baseTurnSpeed * Time.deltaTime);
                 }
@@ -60,9 +63,14 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnCollision(string tag) {
-        if(tag == "Obstacle") {
-            isMoving = false;
-            rotationVerse = rotationVerse != 0 ? rotationVerse : GameRandom.Core.NextSign();
+        if(GameManager.Instance.gameConfig.roombaConfig.inputMode == RoombaInputMode.Crash && tag == "Obstacle") {
+            ToggleCrashMovement(false);
         }
+    }
+
+    void ToggleCrashMovement(bool validMove) {
+        isMoving = validMove;
+        rotationVerse = validMove ? 0 : rotationVerse != 0 ? rotationVerse : GameRandom.Core.NextSign();
+        //trailRenderer.emitting = validMove;
     }
 }
