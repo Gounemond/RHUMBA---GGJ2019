@@ -37,10 +37,10 @@ public class PlayerController : MonoBehaviour {
         switch(GameManager.Instance.gameConfig.roombaConfig.inputMode) {
             case RoombaInputMode.Move:
                 if(Mathf.Abs(player.GetAxis("Move")) > 0) {
-                    transform.Rotate(Vector3.up * player.GetAxis("Move") * GameManager.Instance.gameConfig.roombaConfig.baseTurnSpeed * Time.deltaTime);
+                    transform.Translate(Vector3.forward * player.GetAxis("Move") * GameManager.Instance.gameConfig.roombaConfig.baseMoveSpeed * Time.deltaTime);
                 }
                 if(Mathf.Abs(player.GetAxis("Rotate")) > 0) {
-                    transform.Translate(Vector3.forward * player.GetAxis("Rotate") * GameManager.Instance.gameConfig.roombaConfig.baseMoveSpeed * Time.deltaTime);
+                    transform.Rotate(Vector3.up * player.GetAxis("Rotate") * GameManager.Instance.gameConfig.roombaConfig.baseTurnSpeed * Time.deltaTime);
                 }
                 break;
             case RoombaInputMode.Crash:
