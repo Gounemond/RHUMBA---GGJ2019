@@ -11,6 +11,9 @@ public class MenuManager : MonoBehaviour
 
     [Tooltip("I roomba nel menu che hanno il check input")]
     public RoombaMenuReady[] roombaPlayer;
+    public UIMenuManager menuUIManager;
+
+    public AudioSource sfxROOOOMBAAAH;
 
     private void Awake()
     {
@@ -21,6 +24,7 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
+        yield return StartCoroutine(menuUIManager.FadeIn(1));
         GameData.playerData = new List<PlayerData>();
         for (int i = 0; i < roombaPlayer.Length; i++)
         {
@@ -29,11 +33,15 @@ public class MenuManager : MonoBehaviour
         }
 
         // Wait until all the connected players have choosen and confirmed a microwave
-        while (GameData.playerData.Count </* ReInput.controllers.GetJoysticks().Length && GameData.playerData.Count < */2)
+        while (GameData.playerData.Count < roombaPlayer.Length)
         {
             yield return null;
         }
-        yield return null;
+        sfxROOOOMBAAAH.Play();
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(menuUIManager.FadeOut(1));
+
+        //LoadScene;
     }
 
     // Update is called once per frame
@@ -44,16 +52,17 @@ public class MenuManager : MonoBehaviour
 
     public void AddPlayerRoomba(int playerId)
     {
+        menuUIManager.ReadyPressed(playerId);
         GameData.playerData.Add(new PlayerData(playerId));
     }
 
     public void ControllerConnected(ControllerStatusChangedEventArgs args)
     {
-        Debug.Log("Bella");
+        //
     }
 
     public void ControllerDisconnected(ControllerStatusChangedEventArgs args)
     {
-        Debug.Log("Addio");
+        //
     }
 }

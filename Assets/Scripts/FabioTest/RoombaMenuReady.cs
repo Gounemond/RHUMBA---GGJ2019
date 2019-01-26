@@ -37,20 +37,14 @@ public class RoombaMenuReady : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_rewiredPlayer.GetButton("PlayerReady"))
+        if (_rewiredPlayer.GetButtonDown("PlayerReady"))
         {
             // TODO: animations
             // TODO: audio
             if (OnRoombaReady != null)
             {
                 OnRoombaReady(playerId);
-                RotateMyBottle();
             }
         }
-    }
-
-    public void RotateMyBottle()
-    {
-        myBottle.transform.DORotate(new Vector3(0, 360, 0), 1f, RotateMode.WorldAxisAdd);
     }
 }
