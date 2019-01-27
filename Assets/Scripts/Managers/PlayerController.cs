@@ -6,8 +6,8 @@ public class PlayerController : MonoBehaviour {
     public int playerId;
     int _index;
     Player player;
-    MeshRenderer meshRenderer;
-    TrailRenderer trailRenderer; 
+    public MeshRenderer meshRenderer;
+    public TrailRenderer trailRenderer;
 
     bool isMoving;
     int rotationVerse;
@@ -19,15 +19,10 @@ public class PlayerController : MonoBehaviour {
         playerId = GameData.playerData[index].playerId;
     }
 
-    void Awake() {
-        meshRenderer = GetComponentInChildren<MeshRenderer>();
-        trailRenderer = GetComponentInChildren<TrailRenderer>();
-    }
-
     void Start() {
         if(MainGameManager.Instance.gameConfig.roombaConfig.graphics?.Length > playerId) {
             GameData.playerData.Where(pd => pd.playerId == playerId).FirstOrDefault().graphics = MainGameManager.Instance.gameConfig.roombaConfig.graphics[playerId];
-            meshRenderer.material = MainGameManager.Instance.gameConfig.roombaConfig.graphics[playerId].material;
+            meshRenderer.materials = new Material[] { MainGameManager.Instance.gameConfig.roombaConfig.graphics[playerId].material };
             trailRenderer.startColor = MainGameManager.Instance.gameConfig.roombaConfig.graphics[playerId].trailColor;
             trailRenderer.endColor = trailRenderer.startColor;
         }
