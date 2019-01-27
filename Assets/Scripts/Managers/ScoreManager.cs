@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour {
     IEnumerator Start() {
         yield return StartCoroutine(menuUIManager.FadeIn(1));
         for(int i = 0; i < GameData.playerData?.Count; i++) {
-            scoreBars[i].GetComponent<Image>().color = GameData.playerData[i].trailColor;
+            scoreBars[i].GetComponent<Image>().color = GameData.playerData[i].graphics.trailColor;
             RectTransform rectTransform = scoreBars[i].GetComponent<RectTransform>();
             scoreBars[i].transform.parent.gameObject.SetActive(true);
             float tweenDuration = scoreTweenDurationMax * GameData.playerData[i].tilesCleanedPercentage;

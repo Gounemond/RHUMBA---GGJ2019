@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: 
   roombaConfig: {fileID: 11400000, guid: ce2f965910f29dc488841998d3031afd, type: 2}
-  matchTimeDuration: 90
+  matchTimeDuration: 20
