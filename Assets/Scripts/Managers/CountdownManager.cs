@@ -11,6 +11,8 @@ public class CountdownManager : MonoBehaviour
     public Image controlScreen;
     public Animator cameraAnimator;
     public Camera cinematicCamera;
+    public Image congratsScreen;
+
 
     [Header("Countdown")]
     public Image[] countdownImage;
@@ -123,6 +125,30 @@ public class CountdownManager : MonoBehaviour
     {
         controlScreen.enabled = true;
         controlScreen.DOColor(Color.white, time);
+        yield return new WaitForSeconds(time);
+    }
+
+    /// <summary>
+    /// Calling this will make the congrats screen panel turn clear in given time
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    public IEnumerator FadeInCongrats(float time)
+    {
+        congratsScreen.DOColor(Color.clear, time);
+        yield return new WaitForSeconds(time);
+        congratsScreen.enabled = false;
+    }
+
+    /// <summary>
+    /// Calling this will make the congrats screen panel appear in given time
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    public IEnumerator FadeOutCongrats(float time)
+    {
+        congratsScreen.enabled = true;
+        congratsScreen.DOColor(Color.white, time);
         yield return new WaitForSeconds(time);
     }
 }

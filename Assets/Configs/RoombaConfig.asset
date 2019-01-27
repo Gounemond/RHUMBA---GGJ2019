@@ -18,7 +18,7 @@ MonoBehaviour:
     trailColor: {r: 0.04405483, g: 0.8490566, b: 0.03529412, a: 0.5019608}
     scoreSprite: {fileID: 21300000, guid: 14dd19e7a0d7add49adb8b8ef4e72680, type: 3}
   - material: {fileID: 2100000, guid: c5a96f1877a828841b801a1608194a65, type: 2}
-    trailColor: {r: 1, g: 0.65787435, b: 0, a: 0.5019608}
+    trailColor: {r: 1, g: 0.8577045, b: 0, a: 0.5019608}
     scoreSprite: {fileID: 21300000, guid: 6b943bd8316e32d4db48efd93c9d9902, type: 3}
   - material: {fileID: 2100000, guid: 36d3d1ddaf73dff469b94d0aff27240c, type: 2}
     trailColor: {r: 0.0141509175, g: 0.90190834, b: 1, a: 0.5019608}
