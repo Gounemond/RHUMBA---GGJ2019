@@ -37,6 +37,7 @@ public class CountdownManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.35f);
 
+        cinematicCamera.enabled = false;
         // Very good, now countdown the main manager will make the player spawn, then countdown will be done
     }
 
@@ -61,6 +62,7 @@ public class CountdownManager : MonoBehaviour
 
     public void PlayCameraEndCinematic()
     {
+        cinematicCamera.enabled = true;
         cameraAnimator.SetTrigger("EndCinematic");
         cinematicCamera.depth = 0;
     }

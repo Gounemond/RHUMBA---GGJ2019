@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MasterGame/2_MainGame.unity
     guid: 916b5e1507208ab4bbebdf467a272641
+  - enabled: 1
+    path: Assets/Scenes/MasterGame/3_Score.unity
+    guid: 8f2de46eade2ca946bb0b8f5393b827c
   m_configObjects: {}
