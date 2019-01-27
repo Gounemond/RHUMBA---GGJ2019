@@ -13,7 +13,7 @@ public class PlayerData : IComparable<PlayerData>
 {
     public int playerId;                 // ID of the player to use with Rewired
     public float tilesCleanedPercentage; // Percentage of the tiles cleaned by the player
-    public Color trailColor;             // Color of the trail
+    public RoombaGraphics graphics;      // Graphic elements of the different roombas
 
     /// <summary>
     /// We assume that a new player has not yet cleaned any tiles :)
