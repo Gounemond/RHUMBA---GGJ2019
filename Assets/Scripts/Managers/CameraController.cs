@@ -4,14 +4,14 @@ public class CameraController : MonoBehaviour {
     Vector3 offset;
     public float damping = 1;
 
-    public void Init(int playerId, int numPlayers) {
+    public void Init(int playerIndex, int numPlayers) {
         Camera camera = gameObject.GetComponent<Camera>();
         if(camera != null) {
             float cameraRectWidth = numPlayers > 2 ? 0.5f : 1f;
             float cameraRectHeight = numPlayers > 1 ? 0.5f : 1f;
             float cameraRectX = 0f;
             float cameraRectY = 0f;
-            switch(playerId) {
+            switch(playerIndex) {
                 case 0:
                     if(numPlayers > 1) {
                         cameraRectY = 0.5f;
