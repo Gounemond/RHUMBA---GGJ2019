@@ -82,7 +82,7 @@ public class MainGameManager : MonoBehaviour {
 
         countdownManager.PlayCameraEndCinematic();
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
 
         yield return StartCoroutine(countdownManager.FadeOut(1));
         SceneManager.LoadScene(2);
