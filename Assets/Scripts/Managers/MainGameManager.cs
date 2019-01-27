@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainGameManager : MonoBehaviour {
     public static MainGameManager Instance { get; private set; }
@@ -22,6 +23,8 @@ public class MainGameManager : MonoBehaviour {
     public float currentTimer = 0;
 
     public Transform spawnPoint;
+
+    public Text UITimer;
 
     void Awake() {
         DontDestroyOnLoad(this);
@@ -86,8 +89,9 @@ public class MainGameManager : MonoBehaviour {
     public IEnumerator LoopGame()
     {
         while (currentTimer < gameConfig.matchTimeDuration)
-        {
+        {           
             currentTimer += Time.deltaTime;
+            UITimer.text = ((int) (gameConfig.matchTimeDuration - currentTimer)).ToString();
             yield return null;
         }
     }

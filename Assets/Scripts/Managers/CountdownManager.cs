@@ -18,11 +18,17 @@ public class CountdownManager : MonoBehaviour
     public AudioClip[] sfx_countdown;
     public AudioClip sfx_StartGame;
 
+
+    public GameObject player0Score;
+    public GameObject player1Score;
+    public GameObject player2Score;
+    public GameObject player3Score;
+
+
+
     // Start is called before the first frame update
     void Start()
-    {
-
-
+    {      
     }
 
     public IEnumerator Init()
@@ -53,6 +59,25 @@ public class CountdownManager : MonoBehaviour
             countdownImage[i].transform.DOScale(1, 0.1f);
             yield return new WaitForSeconds(0.1f);
         }
+
+        if (GameData.playerData?.Count == 2)
+        {
+            player0Score.gameObject.SetActive(true);
+            player1Score.gameObject.SetActive(true);
+        }
+        else if (GameData.playerData?.Count == 3)
+        {
+            player0Score.gameObject.SetActive(true);
+            player1Score.gameObject.SetActive(true);
+            player2Score.gameObject.SetActive(true);
+        }
+        else if (GameData.playerData?.Count == 4)
+        {
+            player0Score.gameObject.SetActive(true);
+            player1Score.gameObject.SetActive(true);
+            player2Score.gameObject.SetActive(false);
+            player3Score.gameObject.SetActive(true);
+        }
     }
 
     public void PlayGoSound()
@@ -65,6 +90,12 @@ public class CountdownManager : MonoBehaviour
         cinematicCamera.enabled = true;
         cameraAnimator.SetTrigger("EndCinematic");
         cinematicCamera.depth = 0;
+
+            player0Score.gameObject.SetActive(false);
+            player1Score.gameObject.SetActive(false);
+            player2Score.gameObject.SetActive(false);
+            player3Score.gameObject.SetActive(false);
+      
     }
 
     // Update is called once per frame
