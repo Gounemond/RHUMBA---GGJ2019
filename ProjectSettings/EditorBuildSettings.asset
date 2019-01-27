@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MasterGame/1_Menu.unity
     guid: 746838a23fc2f4b4f8cc8f6ee6c47ff4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test/Marco.unity
     guid: 23a3946cdd12e40468bc96bd8729d479
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MasterGame/2_MainGame.unity
     guid: 3697946287414eb4eab4afa612bb1d3f
   - enabled: 1
