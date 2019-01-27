@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -11,14 +10,7 @@ public class ScoreManager : MonoBehaviour {
     public GameObject[] scoreBars = new GameObject[4];
     public float scoreBarHeightMax = 300f;
     public float scoreTweenDurationMax = 6f;
-
-    //TODO: debug
-    public List<PlayerData> debugPlayerData;
-    void Awake() {
-        //TODO: debug
-        GameData.playerData = debugPlayerData;
-    }
-
+    
     IEnumerator Start() {
         yield return StartCoroutine(menuUIManager.FadeIn(1));
         for(int i = 0; i < GameData.playerData?.Count; i++) {

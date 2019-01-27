@@ -3,15 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class MainGameManager : MonoBehaviour {
     public static MainGameManager Instance { get; private set; }
 
     public GameConfig gameConfig;
-    private GameData gameData;
-
-    public int totalPlayers;
 
     [Header("PreGame")]
     public CountdownManager countdownManager;
@@ -31,13 +27,12 @@ public class MainGameManager : MonoBehaviour {
         DontDestroyOnLoad(this);
         Instance = this;
         GameRandom.Core = new DefaultRandom();
-        gameData = new GameData();
         roombaPlayer = new List<PlayerController>();
     }
 
     IEnumerator Start()
     {
-        Debug.Log("Numero di players " + GameData.playerData.Count);
+        Debug.Log("Numero di players " + GameData.playerData?.Count);
         // Starting here the music (pregame clip)
         audio_backgroundMusic.Play();
 
@@ -45,7 +40,7 @@ public class MainGameManager : MonoBehaviour {
         yield return StartCoroutine(countdownManager.Init());
 
         // Here we spawn the players (and we switch camera), but you won't be able to move as we're still in countdown phase
-        SpawnPlayers(GameData.playerData.Count);
+        SpawnPlayers();
 
         // Let's do five seconds of countdown
         yield return StartCoroutine(countdownManager.Countdown());
@@ -126,40 +121,21 @@ public class MainGameManager : MonoBehaviour {
                 gameConfig.roombaConfig.baseTurnSpeed = 0;
             }
         }
-        if(totalPlayers == 0) {
-            if(Input.GetKeyDown(KeyCode.Alpha1)) {
-                SpawnPlayers(1);
-            }
-            if(Input.GetKeyDown(KeyCode.Alpha2)) {
-                SpawnPlayers(2);
-            }
-            if(Input.GetKeyDown(KeyCode.Alpha3)) {
-                SpawnPlayers(3);
-            }
-            if(Input.GetKeyDown(KeyCode.Alpha4)) {
-                SpawnPlayers(4);
-            }
-        }
     }
-
-    public void LoadScene(string sceneName) {
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void SpawnPlayers(int numPlayers) {
-        for(int i = 0; i < numPlayers; i++) {
+    
+    void SpawnPlayers() {
+        for(int i = 0; i < GameData.playerData?.Count; i++) {
             GameObject gameObject = InstantiateAsset(gameConfig.roombaConfig.prefab);
             if(gameObject != null) {
                 gameObject.transform.position = new Vector3(spawnPoint.position.x + 10 * i, spawnPoint.position.y, spawnPoint.position.z);
                 PlayerController playerController = gameObject.GetComponent<PlayerController>();
                 if(playerController != null) {
-                    playerController.Init(i);
+                    playerController.Init(GameData.playerData[i].playerId);
                     playerController.enabled = true;
                     roombaPlayer.Add(playerController);
                 }
             }
         }
-        totalPlayers = numPlayers;
     }
 
     GameObject InstantiateAsset(GameObject asset) {
