@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TilesManager : MonoBehaviour
 {
@@ -9,14 +10,19 @@ public class TilesManager : MonoBehaviour
     public int player2Tiles;
     public int player3Tiles;
     public int dirtyTiles;
+    public int totalTiles;
 
+    public Text player0Score;
+    public Text player1Score;
+    public Text player2Score;
+    public Text player3Score;
     void Start()
     {
         player0Tiles = 0;
         player1Tiles = 0;
         player2Tiles = 0;
         player3Tiles = 0;
-        dirtyTiles = GameObject.FindGameObjectsWithTag("Tile").Length;
+        totalTiles = GameObject.FindGameObjectsWithTag("Tile").Length;
     }
 
     void Update()  {}
@@ -67,5 +73,16 @@ public class TilesManager : MonoBehaviour
                 dirtyTiles++;
                 break;
         }
+
+       
+        player0Score.text = (player0Tiles * 100 / totalTiles).ToString("0\\%");
+        player1Score.text = (player1Tiles * 100 / totalTiles).ToString("0\\%");
+        if (player2Tiles > 0)
+            player2Score.text = (player2Tiles * 100 / totalTiles).ToString("0\\%");
+        if (player3Tiles > 0)
+            player3Score.text = (player3Tiles * 100 / totalTiles).ToString("0\\%");
+
+
+        return;
     }
 }

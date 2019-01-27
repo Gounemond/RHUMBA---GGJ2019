@@ -14,7 +14,8 @@ public class TileScript : MonoBehaviour
 
     void Start()
     {      
-        oldColour = 4; //grigio iniziale
+        oldColour = newColour = 4; //grigio iniziale
+
     }
 
     void Update(){}
@@ -40,10 +41,10 @@ public class TileScript : MonoBehaviour
                 newColour = 4;
                 break;
         }
-        if (newColour!= oldColour)
+        if (newColour!= oldColour) { 
             tilesManagerScript.UpdateTilesCOunt(oldColour, newColour);
-
-        oldColour = newColour;
+            oldColour = newColour;
+        }
     }
 
 }
