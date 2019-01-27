@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
     bool isMoving;
     int rotationVerse;
 
+    bool batteryEnded = false;
+
     public void Init(int id) {
         playerId = id;
     }
@@ -39,6 +41,12 @@ public class PlayerController : MonoBehaviour {
     public void EnableMovement()
     {
         player = ReInput.players.GetPlayer(playerId);
+    }
+
+    public void DisableMovement()
+    {
+        batteryEnded = true;
+        player = null;
     }
 
     void Update()
@@ -81,7 +89,10 @@ public class PlayerController : MonoBehaviour {
 
                 case RoombaInputMode.Crash:
                 {
-                    transform.Rotate(Vector3.up * rotationVerse * MainGameManager.Instance.gameConfig.roombaConfig.baseTurnSpeed * Time.deltaTime);
+                    if (!batteryEnded)
+                    {
+                        transform.Rotate(Vector3.up * rotationVerse * MainGameManager.Instance.gameConfig.roombaConfig.baseTurnSpeed * Time.deltaTime);
+                    }
                 }
                 break;
             }

@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class MainGameManager : MonoBehaviour {
     public static MainGameManager Instance { get; private set; }
 
     public GameConfig gameConfig;
+    private GameData gameData;
 
     public int totalPlayers;
 
@@ -18,10 +18,12 @@ public class MainGameManager : MonoBehaviour {
     public AudioSource audio_backgroundMusic;
     public AudioClip mus_StartingGame;
     public AudioClip mus_RoombaGame;
+    public AudioClip sfx_BatteryDown;
 
     public List<PlayerController> roombaPlayer;
 
-    public float matchTimeDuration = 138;
+    public float matchTimeDuration = 120;
+    public float currentTimer = 0;
 
     public Transform spawnPoint;
 
@@ -29,22 +31,31 @@ public class MainGameManager : MonoBehaviour {
         DontDestroyOnLoad(this);
         Instance = this;
         GameRandom.Core = new DefaultRandom();
+        gameData = new GameData();
         roombaPlayer = new List<PlayerController>();
     }
 
     IEnumerator Start()
     {
+        Debug.Log("Numero di players " + GameData.playerData.Count);
+        // Starting here the music (pregame clip)
         audio_backgroundMusic.Play();
 
-
+        // In this phase we're doing the countdown. See countdownmanager for this part
         yield return StartCoroutine(countdownManager.Init());
-        SpawnPlayers(4);
 
+        // Here we spawn the players (and we switch camera), but you won't be able to move as we're still in countdown phase
+        SpawnPlayers(GameData.playerData.Count);
 
+        // Let's do five seconds of countdown
         yield return StartCoroutine(countdownManager.Countdown());
 
+        // Brutally switching background music clip with the battle one
         audio_backgroundMusic.clip = mus_RoombaGame;
         audio_backgroundMusic.Play();
+
+        countdownManager.PlayGoSound();
+        // Enabling movement for each roomba
         foreach (PlayerController roomba in roombaPlayer)
         {
             roomba.EnableMovement();
@@ -52,10 +63,38 @@ public class MainGameManager : MonoBehaviour {
         }
 
         // Here we go with the standard game time
-        yield return new WaitForSeconds(matchTimeDuration);
+        yield return StartCoroutine(LoopGame());
+        //yield return new WaitForSeconds(matchTimeDuration);
+
+
         Debug.Log("CAMADONNA E' FINITA");
 
-        //SceneManager.LoadScene(0);
+        audio_backgroundMusic.clip = sfx_BatteryDown;
+        audio_backgroundMusic.loop = false;
+        audio_backgroundMusic.Play();
+
+        foreach (PlayerController roomba in roombaPlayer)
+        {
+            roomba.DisableMovement();
+        }
+
+        yield return new WaitForSeconds(1);
+
+        countdownManager.PlayCameraEndCinematic();
+
+        yield return new WaitForSeconds(2);
+
+        yield return StartCoroutine(countdownManager.FadeOut(1));
+        SceneManager.LoadScene(2);
+    }
+
+    public IEnumerator LoopGame()
+    {
+        while (currentTimer < matchTimeDuration)
+        {
+            currentTimer += Time.deltaTime;
+            yield return null;
+        }
     }
 
     void Update() {

@@ -14,6 +14,7 @@ public class RoombaMenuReady : MonoBehaviour
     public delegate void ActionInt(int playerId);
 
     public event ActionInt OnRoombaReady;
+    public event ActionInt OnGameStart;
 
     public Image myBottle;
 
@@ -44,6 +45,16 @@ public class RoombaMenuReady : MonoBehaviour
             if (OnRoombaReady != null)
             {
                 OnRoombaReady(playerId);
+            }
+        }
+
+        if (_rewiredPlayer.GetButtonDown("StartGame"))
+        {
+            // TODO: animations
+            // TODO: audio
+            if (OnGameStart != null)
+            {
+                OnGameStart(playerId);
             }
         }
     }

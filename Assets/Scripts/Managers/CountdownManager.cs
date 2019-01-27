@@ -10,13 +10,13 @@ public class CountdownManager : MonoBehaviour
     public Image fadePanel;
     public Image controlScreen;
     public Animator cameraAnimator;
+    public Camera cinematicCamera;
 
     [Header("Countdown")]
     public Image[] countdownImage;
     public AudioSource audioCountdown;
     public AudioClip[] sfx_countdown;
-    public Image panelReady;
-    public AudioClip[] sfx_StartGame;
+    public AudioClip sfx_StartGame;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +52,17 @@ public class CountdownManager : MonoBehaviour
             countdownImage[i].transform.DOScale(1, 0.1f);
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    public void PlayGoSound()
+    {
+        audioCountdown.PlayOneShot(sfx_StartGame);
+    }
+
+    public void PlayCameraEndCinematic()
+    {
+        cameraAnimator.SetTrigger("EndCinematic");
+        cinematicCamera.depth = 0;
     }
 
     // Update is called once per frame

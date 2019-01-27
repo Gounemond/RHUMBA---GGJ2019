@@ -8,13 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    private Player _rewiredPlayer;
-
     [Tooltip("I roomba nel menu che hanno il check input")]
     public RoombaMenuReady[] roombaPlayer;
     public UIMenuManager menuUIManager;
 
     public AudioSource sfxROOOOMBAAAH;
+
+    private bool _gameStart = false;
 
     private void Awake()
     {
@@ -31,10 +31,11 @@ public class MenuManager : MonoBehaviour
         {
             // Every time a player joins and confirms his participation, we add him in the playerdata with his choice
             roombaPlayer[i].OnRoombaReady += AddPlayerRoomba;
+            roombaPlayer[i].OnGameStart += OnGameStart;
         }
 
         // Wait until all the connected players have choosen and confirmed a microwave
-        while (GameData.playerData.Count < roombaPlayer.Length)
+        while (GameData.playerData.Count < roombaPlayer.Length && !_gameStart)
         {
             yield return null;
         }
@@ -56,6 +57,11 @@ public class MenuManager : MonoBehaviour
     {
         menuUIManager.ReadyPressed(playerId);
         GameData.playerData.Add(new PlayerData(playerId));
+    }
+
+    public void OnGameStart(int playerId)
+    {
+        _gameStart = true;
     }
 
     public void ControllerConnected(ControllerStatusChangedEventArgs args)
