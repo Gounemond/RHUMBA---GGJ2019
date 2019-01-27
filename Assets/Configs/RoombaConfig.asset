@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: RoombaConfig
   m_EditorClassIdentifier: Assembly-CSharp::RoombaConfig
   prefab: {fileID: 8821127539142747820, guid: 3d87426833859b6479218f91ed726256, type: 3}
-  trailColor:
-  - {r: 0.32156864, g: 0.4745098, b: 0.36862746, a: 0.5019608}
-  - {r: 0.91764706, g: 0.6627451, b: 0.40392157, a: 0.5019608}
-  - {r: 0.078431375, g: 0.24313726, b: 0.4, a: 0.5019608}
-  - {r: 0.74509805, g: 0.2901961, b: 0.3254902, a: 0.5019608}
+  graphics:
+  - material: {fileID: 2100000, guid: 89aac8c8732d9b64f8896c1309af1795, type: 2}
+    trailColor: {r: 0.32156864, g: 0.4745098, b: 0.36862746, a: 0.5019608}
+  - material: {fileID: 2100000, guid: c5a96f1877a828841b801a1608194a65, type: 2}
+    trailColor: {r: 0.91764706, g: 0.6627451, b: 0.40392157, a: 0.5019608}
+  - material: {fileID: 2100000, guid: 36d3d1ddaf73dff469b94d0aff27240c, type: 2}
+    trailColor: {r: 0.078431375, g: 0.24313726, b: 0.4, a: 0.5019608}
+  - material: {fileID: 2100000, guid: 05f106c8a184c094f8c6525c285e0b4b, type: 2}
+    trailColor: {r: 0.74509805, g: 0.2901961, b: 0.3254902, a: 0.5019608}
   inputMode: 1
   baseMoveSpeed: 40
   baseTurnSpeed: 180
