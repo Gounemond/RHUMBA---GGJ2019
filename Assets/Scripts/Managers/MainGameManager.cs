@@ -8,6 +8,7 @@ public class MainGameManager : MonoBehaviour {
     public static MainGameManager Instance { get; private set; }
 
     public GameConfig gameConfig;
+    public TilesManager tilesManager;
 
     [Header("PreGame")]
     public CountdownManager countdownManager;
@@ -17,8 +18,7 @@ public class MainGameManager : MonoBehaviour {
     public AudioClip sfx_BatteryDown;
 
     public List<PlayerController> roombaPlayer;
-
-    public float matchTimeDuration = 120;
+    
     public float currentTimer = 0;
 
     public Transform spawnPoint;
@@ -60,18 +60,18 @@ public class MainGameManager : MonoBehaviour {
         // Here we go with the standard game time
         yield return StartCoroutine(LoopGame());
         //yield return new WaitForSeconds(matchTimeDuration);
-
-
+        
         Debug.Log("CAMADONNA E' FINITA");
 
         audio_backgroundMusic.clip = sfx_BatteryDown;
         audio_backgroundMusic.loop = false;
         audio_backgroundMusic.Play();
 
-        foreach (PlayerController roomba in roombaPlayer)
-        {
+        foreach(PlayerController roomba in roombaPlayer) {
             roomba.DisableMovement();
         }
+
+        tilesManager.SaveFinalScore();
 
         yield return new WaitForSeconds(1);
 
@@ -85,7 +85,7 @@ public class MainGameManager : MonoBehaviour {
 
     public IEnumerator LoopGame()
     {
-        while (currentTimer < matchTimeDuration)
+        while (currentTimer < gameConfig.matchTimeDuration)
         {
             currentTimer += Time.deltaTime;
             yield return null;
@@ -130,7 +130,7 @@ public class MainGameManager : MonoBehaviour {
                 gameObject.transform.position = new Vector3(spawnPoint.position.x + 10 * i, spawnPoint.position.y, spawnPoint.position.z);
                 PlayerController playerController = gameObject.GetComponent<PlayerController>();
                 if(playerController != null) {
-                    playerController.Init(GameData.playerData[i].playerId);
+                    playerController.Init(i);
                     playerController.enabled = true;
                     roombaPlayer.Add(playerController);
                 }

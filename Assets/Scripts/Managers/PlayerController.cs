@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     public int playerId;
+    int _index;
     Player player;
     TrailRenderer trailRenderer;
 
@@ -12,8 +13,9 @@ public class PlayerController : MonoBehaviour {
 
     bool batteryEnded = false;
 
-    public void Init(int id) {
-        playerId = id;
+    public void Init(int index) {
+        _index = index;
+        playerId = GameData.playerData[index].playerId;
     }
 
     void Awake() {
@@ -21,7 +23,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start() {
-        //player = ReInput.players.GetPlayer(playerId);
         if (MainGameManager.Instance.gameConfig.roombaConfig.trailColor?.Length > playerId) {
             trailRenderer.startColor = MainGameManager.Instance.gameConfig.roombaConfig.trailColor[playerId];
             trailRenderer.endColor = trailRenderer.startColor;
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour {
         CameraController cameraController = gameObject.GetComponentInChildren<CameraController>();
         if (cameraController != null)
         {
-            cameraController.Init(playerId, GameData.playerData.Count);
+            cameraController.Init(_index, GameData.playerData.Count);
             cameraController.enabled = true;
         }
     }

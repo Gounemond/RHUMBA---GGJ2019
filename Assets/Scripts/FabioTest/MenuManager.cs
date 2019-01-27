@@ -57,6 +57,7 @@ public class MenuManager : MonoBehaviour
     {
         menuUIManager.ReadyPressed(playerId);
         GameData.playerData.Add(new PlayerData(playerId));
+        roombaPlayer[playerId].OnRoombaReady -= AddPlayerRoomba;
     }
 
     public void OnGameStart(int playerId)
