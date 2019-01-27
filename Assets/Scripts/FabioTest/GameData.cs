@@ -8,10 +8,12 @@ public class GameData : MonoBehaviour
     public static List<PlayerData> playerData;
 }
 
+[Serializable]
 public class PlayerData : IComparable<PlayerData>
 {
-    public int playerId;            // ID of the player to use with Rewired
-    public int tilesCleaned;        // Number of the tiles cleaned by the player
+    public int playerId;                 // ID of the player to use with Rewired
+    public float tilesCleanedPercentage; // Percentage of the tiles cleaned by the player
+    public Color trailColor;             // Color of the trail
 
     /// <summary>
     /// We assume that a new player has not yet cleaned any tiles :)
@@ -20,7 +22,7 @@ public class PlayerData : IComparable<PlayerData>
     public PlayerData(int newPlayerId)
     {
         playerId = newPlayerId;
-        tilesCleaned = 0;
+        tilesCleanedPercentage = 0f;
     }
 
     //This method is required by the IComparable

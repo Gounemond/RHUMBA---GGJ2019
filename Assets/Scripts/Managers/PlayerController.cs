@@ -1,4 +1,5 @@
 ﻿using Rewired;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         player = ReInput.players.GetPlayer(playerId);
         if(GameManager.Instance.gameConfig.roombaConfig.trailColor?.Length > playerId) {
+            GameData.playerData.Where(pd => pd.playerId == playerId).FirstOrDefault().trailColor = GameManager.Instance.gameConfig.roombaConfig.trailColor[playerId];
             trailRenderer.startColor = GameManager.Instance.gameConfig.roombaConfig.trailColor[playerId];
             trailRenderer.endColor = trailRenderer.startColor;
         }
