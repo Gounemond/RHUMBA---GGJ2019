@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-   public int playerId;
+    public int playerId;
     Player player;
     TrailRenderer trailRenderer;
 
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
         CameraController cameraController = gameObject.GetComponentInChildren<CameraController>();
         if (cameraController != null)
         {
-            cameraController.Init(playerId, MainGameManager.Instance.totalPlayers);
+            cameraController.Init(playerId, GameData.playerData.Count);
             cameraController.enabled = true;
         }
     }

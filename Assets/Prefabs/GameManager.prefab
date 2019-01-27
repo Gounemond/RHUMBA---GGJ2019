@@ -40,7 +40,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 269707220325197759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe5685c9b11f334dbb55494996515ae, type: 3}
+  m_Script: {fileID: 11500000, guid: d1682c1caa327774783c2d20059f92fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameConfig: {fileID: 11400000, guid: 5304e820d0cfc0c46ae18dfe9722fbf9, type: 2}
+  gameConfig: {fileID: 0}
+  countdownManager: {fileID: 0}
+  audio_backgroundMusic: {fileID: 0}
+  mus_StartingGame: {fileID: 0}
+  mus_RoombaGame: {fileID: 0}
+  sfx_BatteryDown: {fileID: 0}
+  roombaPlayer: []
+  matchTimeDuration: 120
+  currentTimer: 0
+  spawnPoint: {fileID: 0}
