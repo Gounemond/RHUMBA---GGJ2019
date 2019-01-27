@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainGameManager : MonoBehaviour {
     public static MainGameManager Instance { get; private set; }
@@ -19,6 +20,8 @@ public class MainGameManager : MonoBehaviour {
     public AudioClip mus_RoombaGame;
 
     public List<PlayerController> roombaPlayer;
+
+    public float matchTimeDuration = 138;
 
     public Transform spawnPoint;
 
@@ -48,6 +51,11 @@ public class MainGameManager : MonoBehaviour {
             yield return null;
         }
 
+        // Here we go with the standard game time
+        yield return new WaitForSeconds(matchTimeDuration);
+        Debug.Log("CAMADONNA E' FINITA");
+
+        //SceneManager.LoadScene(0);
     }
 
     void Update() {
