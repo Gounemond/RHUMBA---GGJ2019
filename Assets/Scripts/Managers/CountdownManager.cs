@@ -18,19 +18,8 @@ public class CountdownManager : MonoBehaviour
     public AudioClip[] sfx_countdown;
     public AudioClip sfx_StartGame;
 
-
-    public GameObject player0Score;
-    public GameObject player1Score;
-    public GameObject player2Score;
-    public GameObject player3Score;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {      
-    }
-
+    public GameObject[] playerScoreUI = new GameObject[4];
+    
     public IEnumerator Init()
     {
         // Fade in, show controls
@@ -60,23 +49,9 @@ public class CountdownManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        if (GameData.playerData?.Count == 2)
-        {
-            player0Score.gameObject.SetActive(true);
-            player1Score.gameObject.SetActive(true);
-        }
-        else if (GameData.playerData?.Count == 3)
-        {
-            player0Score.gameObject.SetActive(true);
-            player1Score.gameObject.SetActive(true);
-            player2Score.gameObject.SetActive(true);
-        }
-        else if (GameData.playerData?.Count == 4)
-        {
-            player0Score.gameObject.SetActive(true);
-            player1Score.gameObject.SetActive(true);
-            player2Score.gameObject.SetActive(false);
-            player3Score.gameObject.SetActive(true);
+        foreach(PlayerData playerData in GameData.playerData) {
+            playerScoreUI[playerData.playerId].GetComponent<Image>().sprite = playerData.graphics.scoreSprite;
+            playerScoreUI[playerData.playerId].SetActive(true);
         }
     }
 
@@ -91,11 +66,9 @@ public class CountdownManager : MonoBehaviour
         cameraAnimator.SetTrigger("EndCinematic");
         cinematicCamera.depth = 0;
 
-            player0Score.gameObject.SetActive(false);
-            player1Score.gameObject.SetActive(false);
-            player2Score.gameObject.SetActive(false);
-            player3Score.gameObject.SetActive(false);
-      
+        foreach(GameObject playerScore in playerScoreUI) {
+            playerScore.SetActive(false);
+        }
     }
 
     // Update is called once per frame
