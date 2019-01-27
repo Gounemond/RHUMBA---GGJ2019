@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour {
     public UIMenuManager menuUIManager;
@@ -31,6 +32,6 @@ public class ScoreManager : MonoBehaviour {
         yield return new WaitForSeconds(10f);
         yield return StartCoroutine(menuUIManager.FadeOut(1));
 
-        //LoadScene;
+        SceneManager.LoadScene(0);
     }
 }
