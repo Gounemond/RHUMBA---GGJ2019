@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainGameManager : MonoBehaviour {
     public static MainGameManager Instance { get; private set; }
@@ -11,17 +12,42 @@ public class MainGameManager : MonoBehaviour {
 
     public int totalPlayers;
 
+    [Header("PreGame")]
+    public CountdownManager countdownManager;
+    public AudioSource audio_backgroundMusic;
+    public AudioClip mus_StartingGame;
+    public AudioClip mus_RoombaGame;
+
+    public List<PlayerController> roombaPlayer;
+
     public Transform spawnPoint;
 
     void Awake() {
         DontDestroyOnLoad(this);
         Instance = this;
         GameRandom.Core = new DefaultRandom();
+        roombaPlayer = new List<PlayerController>();
     }
 
     IEnumerator Start()
     {
-        yield return null;
+        audio_backgroundMusic.Play();
+
+
+        yield return StartCoroutine(countdownManager.Init());
+        SpawnPlayers(4);
+
+
+        yield return StartCoroutine(countdownManager.Countdown());
+
+        audio_backgroundMusic.clip = mus_RoombaGame;
+        audio_backgroundMusic.Play();
+        foreach (PlayerController roomba in roombaPlayer)
+        {
+            roomba.EnableMovement();
+            yield return null;
+        }
+
     }
 
     void Update() {
@@ -82,6 +108,7 @@ public class MainGameManager : MonoBehaviour {
                 if(playerController != null) {
                     playerController.Init(i);
                     playerController.enabled = true;
+                    roombaPlayer.Add(playerController);
                 }
             }
         }

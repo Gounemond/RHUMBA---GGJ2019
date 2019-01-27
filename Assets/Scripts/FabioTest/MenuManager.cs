@@ -4,6 +4,7 @@ using System;
 using DG.Tweening;
 using Rewired;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class MenuManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine(menuUIManager.FadeOut(1));
 
+        SceneManager.LoadScene(1);
         //LoadScene;
     }
 
